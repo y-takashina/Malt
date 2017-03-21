@@ -26,12 +26,12 @@ namespace Malt
 
         public static TResult[,] Select<TSource, TResult>(this TSource[,] matrix, Func<TSource, TResult> selector)
         {
-            var m = matrix.GetLength(0);
-            var n = matrix.GetLength(1);
-            var results = new TResult[m, n];
-            for (var i = 0; i < m; i++)
+            var raws = matrix.GetLength(0);
+            var cols = matrix.GetLength(1);
+            var results = new TResult[raws, cols];
+            for (var i = 0; i < raws; i++)
             {
-                for (var j = 0; j < n; j++)
+                for (var j = 0; j < cols; j++)
                 {
                     results[i, j] = selector(matrix[i, j]);
                 }
