@@ -6,13 +6,18 @@ namespace Malt
 {
     public static class ProbabilityExtensions
     {
-        public static double StandardDeviation(this IEnumerable<double> values)
+        public static double Deviation(this IEnumerable<double> enumerable)
         {
-            var array = values as double[] ?? values.ToArray();
+            var array = enumerable as double[] ?? enumerable.ToArray();
             if (!array.Any()) return 0;
             var avg = array.Average();
             var sum = array.Sum(x => Math.Pow(x - avg, 2));
-            return Math.Sqrt(sum/array.Length);
+            return sum / array.Length;
+        }
+
+        public static double StandardDeviation(this IEnumerable<double> enumerable)
+        {
+            return Math.Sqrt(enumerable.Deviation());
         }
 
         public static double MinkowskiDistance(IEnumerable<double> vector1, IEnumerable<double> vector2, double order)
