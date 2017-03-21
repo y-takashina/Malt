@@ -70,7 +70,7 @@ namespace Malt
             return vector;
         }
 
-        public static TResult[,] Cast<TSource, TResult>(this TSource[,] self, Func<TSource, TResult> cast)
+        public static TResult[,] Select<TSource, TResult>(this TSource[,] self, Func<TSource, TResult> selector)
         {
             var m = self.GetLength(0);
             var n = self.GetLength(1);
@@ -79,7 +79,7 @@ namespace Malt
             {
                 for (var j = 0; j < n; j++)
                 {
-                    matrix[i, j] = cast(self[i, j]);
+                    matrix[i, j] = selector(self[i, j]);
                 }
             }
             return matrix;
