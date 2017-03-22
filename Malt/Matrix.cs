@@ -21,15 +21,7 @@ namespace Malt
 
         public static double[,] Zeros(int n)
         {
-            var results = new double[n, n];
-            for (var i = 0; i < n; i++)
-            {
-                for (var j = 0; j < n; j++)
-                {
-                    results[i, j] = 0;
-                }
-            }
-            return results;
+            return new double[n, n];
         }
 
         public static double[,] Eye(int n)
@@ -37,15 +29,12 @@ namespace Malt
             var results = new double[n, n];
             for (var i = 0; i < n; i++)
             {
-                for (var j = 0; j < n; j++)
-                {
-                    results[i, j] = i == j ? 1 : 0;
-                }
+                results[i, i] = 1;
             }
             return results;
         }
 
-        public static (int i, int j, double value)[] ToCoo(this double[,] matrix, double threshold = 1e-300)
+        public static (int i, int j, double value)[] ToCoordinateList(this double[,] matrix, double threshold = 1e-300)
         {
             var raws = matrix.GetLength(0);
             var cols = matrix.GetLength(1);

@@ -27,6 +27,11 @@ namespace Malt
             return vector;
         }
 
+        public static double[] Gauss(int n, double mean = 0, double deviation = 1)
+        {
+            throw new NotImplementedException();
+        }
+
         public static int[] OneHot(int n, int k)
         {
             var vector = new int[n];
