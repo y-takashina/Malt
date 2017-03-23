@@ -25,7 +25,7 @@ namespace Malt
             var array1 = vector1.ToArray();
             var array2 = vector2.ToArray();
             if (array1.Length != array2.Length) throw new IndexOutOfRangeException("vector1 and vector2 must have the same length.");
-            return Math.Pow(array1.Zip(array2, Tuple.Create).Sum(tuple => Math.Pow(Math.Abs(tuple.Item1 - tuple.Item2), order)), 1.0/order);
+            return Math.Pow(array1.Zip(array2, Tuple.Create).Sum(tuple => Math.Pow(Math.Abs(tuple.Item1 - tuple.Item2), order)), 1.0 / order);
         }
 
         public static double ManhattanDistance(IEnumerable<double> vector1, IEnumerable<double> vector2)
@@ -45,14 +45,14 @@ namespace Malt
 
         public static double Entropy(this IEnumerable<double> probabilities)
         {
-            return probabilities.Where(p => Math.Abs(p) > 1e-300).Sum(p => -p*Math.Log(p, 2));
+            return probabilities.Where(p => Math.Abs(p) > 1e-300).Sum(p => -p * Math.Log(p, 2));
         }
 
         public static double Entropy<T>(this IEnumerable<T> series)
         {
             var array = series.ToArray();
             var points = array.Distinct().ToArray();
-            var probabilities = points.Select(v1 => (double) array.Count(v2 => Equals(v1, v2))/array.Length);
+            var probabilities = points.Select(v1 => (double) array.Count(v2 => Equals(v1, v2)) / array.Length);
             return probabilities.Entropy();
         }
 
@@ -93,10 +93,10 @@ namespace Malt
             var sign = Math.Sign(x);
             x = Math.Abs(x);
 
-            var t = 1.0/(1.0 + p*x);
-            var y = 1.0 - ((((a5*t + a4)*t + a3)*t + a2)*t + a1)*t*Math.Exp(-x*x);
+            var t = 1.0 / (1.0 + p * x);
+            var y = 1.0 - ((((a5 * t + a4) * t + a3) * t + a2) * t + a1) * t * Math.Exp(-x * x);
 
-            return sign*y;
+            return sign * y;
         }
 
         public static double Erfc(double x)
@@ -106,9 +106,9 @@ namespace Malt
 
         public static double QFunction(double x, double mean, double standardDeviation)
         {
-            if (x < mean) x = 2*mean - x;
-            var z = (x - mean)/standardDeviation;
-            return Erfc(z/Math.Sqrt(2))/2;
+            if (x < mean) x = 2 * mean - x;
+            var z = (x - mean) / standardDeviation;
+            return Erfc(z / Math.Sqrt(2)) / 2;
         }
     }
 }
