@@ -20,9 +20,9 @@ namespace Malt.LinearAlgebra
 
         public static double[,] Uniform(int n, double value) => Uniform(n, n, value);
 
-        public static double[,] Ones(int m, int n) => Uniform(m, n, 1);
+        public static double[,] Ones(int m, int n) => Uniform(m, n, 1.0);
 
-        public static double[,] Ones(int n) => Uniform(n, 1.0);
+        public static double[,] Ones(int n) => Uniform(n, n, 1.0);
 
         public static double[,] Zeros(int m, int n) => new double[m, n];
 
