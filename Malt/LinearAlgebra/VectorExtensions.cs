@@ -13,10 +13,16 @@ namespace Malt.LinearAlgebra
             Console.Write("[");
             for (var i = 0; i < array.Length; i++)
             {
-                if (array[i] is IEnumerable<object> inner) inner.Print();
+                if (array[i] is IEnumerable<object> inner) inner.PrintLine();
                 else Console.Write(array[i] + (i < array.Length - 1 ? ", " : ""));
             }
-            Console.WriteLine("]");
+            Console.Write("]");
+        }
+
+        public static void PrintLine<T>(this IEnumerable<T> enumerable)
+        {
+            enumerable.Print();
+            Console.WriteLine();
         }
 
         public static double[] Normalize(this IEnumerable<int> enumerable)

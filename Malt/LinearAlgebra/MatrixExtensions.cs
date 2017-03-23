@@ -4,7 +4,7 @@ namespace Malt.LinearAlgebra
 {
     public static class MatrixExtensions
     {
-        public static void Print<T>(this T[,] matrix)
+        public static void PrintLine<T>(this T[,] matrix)
         {
             var raws = matrix.GetLength(0);
             var cols = matrix.GetLength(1);
