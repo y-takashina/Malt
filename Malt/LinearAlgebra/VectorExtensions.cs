@@ -38,5 +38,10 @@ namespace Malt.LinearAlgebra
             var sum = array.Sum();
             return array.Select(v => v / sum).ToArray();
         }
+
+        public static double LinearCombinate(this IEnumerable<double> variables, IEnumerable<double> weights)
+        {
+            return variables.Zip(weights, (v, w) => v * w).Sum();
+        }
     }
 }
