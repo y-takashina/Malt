@@ -23,9 +23,19 @@ namespace Malt.LinearAlgebra
             return Uniform(n, n, value);
         }
 
+        public static double[,] Ones(int m, int n)
+        {
+            return Uniform(m, n, 1);
+        }
+
         public static double[,] Ones(int n)
         {
             return Uniform(n, 1.0);
+        }
+
+        public static double[,] Zeros(int m, int n)
+        {
+            return new double[m, n];
         }
 
         public static double[,] Zeros(int n)

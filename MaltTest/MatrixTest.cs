@@ -16,7 +16,7 @@ namespace MaltTest
         [Fact]
         public void UniformTest()
         {
-            var matrix = Matrix.Uniform(10, 1.0);
+            var matrix = Matrix.Uniform(2, 5, 1.0);
             for (var i = 0; i < matrix.GetLength(0); i++)
             {
                 for (var j = 0; j < matrix.GetLength(1); j++)
