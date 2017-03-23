@@ -2,7 +2,7 @@
 
 namespace Malt.LinearAlgebra
 {
-    public static class Vector
+    public static partial class Vector
     {
         public static double[] Uniform(int n, double value)
         {

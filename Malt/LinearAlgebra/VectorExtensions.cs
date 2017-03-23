@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Malt.LinearAlgebra
 {
-    public static class VectorExtensions
+    public static partial class Vector
     {
         public static void Print<T>(this IEnumerable<T> enumerable)
         {

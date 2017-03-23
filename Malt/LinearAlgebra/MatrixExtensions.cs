@@ -2,7 +2,7 @@
 
 namespace Malt.LinearAlgebra
 {
-    public static class MatrixExtensions
+    public static partial class Matrix
     {
         public static void PrintLine<T>(this T[,] matrix)
         {

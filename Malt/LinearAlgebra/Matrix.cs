@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Malt.LinearAlgebra
 {
-    public static class Matrix
+    public static partial class Matrix
     {
         public static double[,] Uniform(int m, int n, double value)
         {
