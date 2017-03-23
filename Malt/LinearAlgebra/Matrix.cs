@@ -37,24 +37,5 @@ namespace Malt.LinearAlgebra
             }
             return results;
         }
-
-        public static (int i, int j, double value)[] ToCoordinateList(this double[,] matrix, double threshold = 1e-300)
-        {
-            var raws = matrix.GetLength(0);
-            var cols = matrix.GetLength(1);
-            var results = new List<(int, int, double)>();
-            for (var i = 0; i < raws; i++)
-            {
-                for (var j = 0; j < cols; j++)
-                {
-                    if (Math.Abs(matrix[i, j]) < threshold)
-                    {
-                        var value = matrix[i, j];
-                        results.Add((i, j, value));
-                    }
-                }
-            }
-            return results.ToArray();
-        }
     }
 }

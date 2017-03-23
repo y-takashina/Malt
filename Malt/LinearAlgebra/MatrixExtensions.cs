@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Malt.LinearAlgebra
 {
@@ -34,7 +35,7 @@ namespace Malt.LinearAlgebra
             return results;
         }
 
-        public static T[,] SwapRaws<T>(this T[,] matrix, int r1, int r2) where T : struct
+        public static T[,] SwapRaws<T>(this T[,] matrix, int r1, int r2)
         {
             var raws = matrix.GetLength(0);
             var cols = matrix.GetLength(1);
@@ -48,7 +49,7 @@ namespace Malt.LinearAlgebra
             return matrix;
         }
 
-        public static T[,] SwapCols<T>(this T[,] matrix, int c1, int c2) where T : struct
+        public static T[,] SwapCols<T>(this T[,] matrix, int c1, int c2)
         {
             var raws = matrix.GetLength(0);
             var cols = matrix.GetLength(1);
@@ -62,7 +63,7 @@ namespace Malt.LinearAlgebra
             return matrix;
         }
 
-        public static T[,] OrderRaws<T>(this T[,] matrix, int[] order) where T : struct
+        public static T[,] OrderRaws<T>(this T[,] matrix, int[] order)
         {
             var raws = matrix.GetLength(0);
             var cols = matrix.GetLength(1);
@@ -78,7 +79,7 @@ namespace Malt.LinearAlgebra
             return results;
         }
 
-        public static T[,] OrderCols<T>(this T[,] matrix, int[] order) where T : struct
+        public static T[,] OrderCols<T>(this T[,] matrix, int[] order)
         {
             var raws = matrix.GetLength(0);
             var cols = matrix.GetLength(1);
@@ -247,6 +248,25 @@ namespace Malt.LinearAlgebra
                 }
             }
             return results;
+        }
+
+        public static (int i, int j, double value)[] ToCoordinateList(this double[,] matrix, double threshold = 1e-300)
+        {
+            var raws = matrix.GetLength(0);
+            var cols = matrix.GetLength(1);
+            var results = new List<(int, int, double)>();
+            for (var i = 0; i < raws; i++)
+            {
+                for (var j = 0; j < cols; j++)
+                {
+                    if (Math.Abs(matrix[i, j]) < threshold)
+                    {
+                        var value = matrix[i, j];
+                        results.Add((i, j, value));
+                    }
+                }
+            }
+            return results.ToArray();
         }
     }
 }
