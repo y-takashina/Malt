@@ -4,21 +4,21 @@ namespace Malt.LinearAlgebra
 {
     public static class Vector
     {
+        public static double[] Uniform(int n, double value)
+        {
+            var vector = new double[n];
+            for (var i = 0; i < n; i++) vector[i] = value;
+            return vector;
+        }
+
         public static double[] Ones(int n)
         {
-            return Uniform(n, 1);
+            return Uniform(n, 1.0);
         }
 
         public static double[] Zeros(int n)
         {
             return new double[n];
-        }
-
-        public static double[] Uniform(int n, int value)
-        {
-            var vector = new double[n];
-            for (var i = 0; i < n; i++) vector[i] = value;
-            return vector;
         }
 
         public static double[] Random(int n, double mean = 0, double amplitude = 1)

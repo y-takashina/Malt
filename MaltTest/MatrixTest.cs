@@ -25,5 +25,18 @@ namespace MaltTest
                 }
             }
         }
+
+        [Fact]
+        public void EyeTest()
+        {
+            var matrix = Matrix.Eye(10);
+            for (var i = 0; i < matrix.GetLength(0); i++)
+            {
+                for (var j = 0; j < matrix.GetLength(1); j++)
+                {
+                    Assert.Equal(i == j ? 1.0 : 0.0, matrix[i, j]);
+                }
+            }
+        }
     }
 }

@@ -5,10 +5,10 @@ namespace Malt.LinearAlgebra
 {
     public static class Matrix
     {
-        public static double[,] Uniform(int n, double value)
+        public static double[,] Uniform(int m, int n, double value)
         {
-            var results = new double[n, n];
-            for (var i = 0; i < n; i++)
+            var results = new double[m, n];
+            for (var i = 0; i < m; i++)
             {
                 for (var j = 0; j < n; j++)
                 {
@@ -18,9 +18,14 @@ namespace Malt.LinearAlgebra
             return results;
         }
 
+        public static double[,] Uniform(int n, double value)
+        {
+            return Uniform(n, n, value);
+        }
+
         public static double[,] Ones(int n)
         {
-            return Uniform(n, 1);
+            return Uniform(n, 1.0);
         }
 
         public static double[,] Zeros(int n)
