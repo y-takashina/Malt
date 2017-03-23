@@ -11,15 +11,9 @@ namespace Malt.LinearAlgebra
             return vector;
         }
 
-        public static double[] Ones(int n)
-        {
-            return Uniform(n, 1.0);
-        }
+        public static double[] Ones(int n) => Uniform(n, 1.0);
 
-        public static double[] Zeros(int n)
-        {
-            return new double[n];
-        }
+        public static double[] Zeros(int n) => new double[n];
 
         public static double[] Random(int n, double mean = 0, double amplitude = 1)
         {
