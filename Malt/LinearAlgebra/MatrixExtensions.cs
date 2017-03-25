@@ -35,6 +35,10 @@ namespace Malt.LinearAlgebra
             return results;
         }
 
+        public static int Raws<T>(this T[,] matrix) => matrix.GetLength(0);
+        public static int Cols<T>(this T[,] matrix) => matrix.GetLength(1);
+        public static (int raws, int cols) Shape<T>(this T[,] matrix) => (matrix.GetLength(0), matrix.GetLength(1));
+
         public static T[,] SwapRaws<T>(this T[,] matrix, int r1, int r2)
         {
             var raws = matrix.GetLength(0);
