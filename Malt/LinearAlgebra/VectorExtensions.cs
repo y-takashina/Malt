@@ -46,7 +46,7 @@ namespace Malt.LinearAlgebra
 
         public static double InnerProduct(this IEnumerable<double> vector1, IEnumerable<double> vector2)
         {
-            return LinearCombinate(vector1, vector2);
+            return vector1.Zip(vector2, (v, w) => v * w).Sum();
         }
 
         public static double[,] OuterProduct(this IEnumerable<double> vector1, IEnumerable<double> vector2)
@@ -66,7 +66,7 @@ namespace Malt.LinearAlgebra
 
         public static double LinearCombinate(this IEnumerable<double> variables, IEnumerable<double> weights)
         {
-            return variables.Zip(weights, (v, w) => v * w).Sum();
+            return InnerProduct(variables, weights);
         }
     }
 }
