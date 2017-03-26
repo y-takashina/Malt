@@ -45,25 +45,6 @@ namespace Malt.LinearAlgebra
             return vector.Select(v => v / scalar).ToArray();
         }
 
-        public static double Norm(this IEnumerable<double> vector, double order = 2.0)
-        {
-            return Math.Pow(vector.Sum(v => Math.Pow(v, order)), 1 / order);
-        }
-
-        public static double[] Normalize(this IEnumerable<int> enumerable)
-        {
-            var array = enumerable as int[] ?? enumerable.ToArray();
-            var sum = array.Sum();
-            return array.Select(v => (double) v / sum).ToArray();
-        }
-
-        public static double[] Normalize(this IEnumerable<double> enumerable)
-        {
-            var array = enumerable as double[] ?? enumerable.ToArray();
-            var sum = array.Sum();
-            return array.Select(v => v / sum).ToArray();
-        }
-
         public static double InnerProduct(this IEnumerable<double> vector1, IEnumerable<double> vector2)
         {
             return vector1.Zip(vector2, (v, w) => v * w).Sum();
@@ -82,6 +63,25 @@ namespace Malt.LinearAlgebra
                 }
             }
             return results;
+        }
+
+        public static double Norm(this IEnumerable<double> vector, double order = 2.0)
+        {
+            return Math.Pow(vector.Sum(v => Math.Pow(v, order)), 1 / order);
+        }
+
+        public static double[] Normalize(this IEnumerable<int> enumerable)
+        {
+            var array = enumerable as int[] ?? enumerable.ToArray();
+            var sum = array.Sum();
+            return array.Select(v => (double) v / sum).ToArray();
+        }
+
+        public static double[] Normalize(this IEnumerable<double> enumerable)
+        {
+            var array = enumerable as double[] ?? enumerable.ToArray();
+            var sum = array.Sum();
+            return array.Select(v => v / sum).ToArray();
         }
 
         public static double LinearCombinate(this IEnumerable<double> variables, IEnumerable<double> weights)
