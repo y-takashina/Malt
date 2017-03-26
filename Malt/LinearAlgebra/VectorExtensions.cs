@@ -30,9 +30,19 @@ namespace Malt.LinearAlgebra
             return vector1.Zip(vector2, (v1, v2) => v1 + v2).ToArray();
         }
 
+        public static double[] Sub(this IEnumerable<double> vector1, IEnumerable<double> vector2)
+        {
+            return vector1.Zip(vector2, (v1, v2) => v1 - v2).ToArray();
+        }
+
         public static double[] Mul(this IEnumerable<double> vector, double scalar)
         {
             return vector.Select(v => v * scalar).ToArray();
+        }
+
+        public static double[] Div(this IEnumerable<double> vector, double scalar)
+        {
+            return vector.Select(v => v / scalar).ToArray();
         }
 
         public static double Norm(this IEnumerable<double> vector, double order = 2.0)
