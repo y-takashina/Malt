@@ -25,9 +25,19 @@ namespace Malt.LinearAlgebra
             Console.WriteLine();
         }
 
-        public static double Norm(this IEnumerable<double> vector, double order = 2)
+        public static double[] Add(this IEnumerable<double> vector1, IEnumerable<double> vector2)
         {
-            return vector.Sum(v => Math.Pow(v, order));
+            return vector1.Zip(vector2, (v1, v2) => v1 + v2).ToArray();
+        }
+
+        public static double[] Mul(this IEnumerable<double> vector, double scalar)
+        {
+            return vector.Select(v => v * scalar).ToArray();
+        }
+
+        public static double Norm(this IEnumerable<double> vector, double order = 2.0)
+        {
+            return Math.Pow(vector.Sum(v => Math.Pow(v, order)), 1 / order);
         }
 
         public static double[] Normalize(this IEnumerable<int> enumerable)
@@ -67,6 +77,12 @@ namespace Malt.LinearAlgebra
         public static double LinearCombinate(this IEnumerable<double> variables, IEnumerable<double> weights)
         {
             return InnerProduct(variables, weights);
+        }
+
+        public static double[] LinearCombinate(this IEnumerable<double[]> variables, IEnumerable<double> weights)
+        {
+            var n = weights.Count();
+            return variables.Zip(weights, (v, w) => v.Mul(w)).Aggregate(Zeros(n), (v1, v2) => v1.Add(v2));
         }
 
         public static T[,] Reshape<T>(this IEnumerable<T> enumerable, (int, int) ints)
@@ -120,6 +136,4 @@ namespace Malt.LinearAlgebra
             return results;
         }
     }
-}
-
 }
