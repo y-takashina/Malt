@@ -6,6 +6,8 @@ namespace Malt
 {
     public static class ProbabilityExtensions
     {
+        public static double Mean(this IEnumerable<double> enumerable) => enumerable.Average();
+
         public static double Deviation(this IEnumerable<double> enumerable)
         {
             var array = enumerable as double[] ?? enumerable.ToArray();
