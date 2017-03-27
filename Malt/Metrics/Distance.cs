@@ -28,5 +28,7 @@ namespace Malt.Metrics
         {
             return vector1.Zip(vector2, Tuple.Create).Count(tuple => !tuple.Item1.Equals(tuple.Item2));
         }
+
+        public static int CalcHammingDistance(string str1, string str2) => CalcHammingDistance(str1.ToCharArray(), str2.ToCharArray());
     }
 }
