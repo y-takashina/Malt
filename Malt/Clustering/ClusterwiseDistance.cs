@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Malt.Metrics
+namespace Malt.Clustering
 {
-    public static class Metrics
+    public static class ClusterwiseDistance
     {
         public static Func<(double d, int n), (double d, int n), double> Shortest = (c1, c2) => c1.d < c2.d ? c1.d : c2.d;
         public static Func<(double d, int n), (double d, int n), double> Longest = (c1, c2) => c1.d > c2.d ? c1.d : c2.d;
