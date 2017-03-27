@@ -62,7 +62,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="MatrixTest.cs" />
+    <Compile Include="LinearAlgebra\MatrixTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
