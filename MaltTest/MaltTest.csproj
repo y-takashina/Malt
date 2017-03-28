@@ -66,6 +66,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Clustering\AggregativeHierarchicalClusteringTest.cs" />
+    <Compile Include="Clustering\ClusterTest.cs" />
     <Compile Include="LinearAlgebra\MatrixTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
