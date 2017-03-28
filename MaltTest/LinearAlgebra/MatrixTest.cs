@@ -1,9 +1,7 @@
-﻿using System;
-using System.Linq;
-using Malt.LinearAlgebra;
+﻿using Malt.LinearAlgebra;
 using Xunit;
 
-namespace MaltTest
+namespace MaltTest.LinearAlgebra
 {
     public class MatrixTest
     {
