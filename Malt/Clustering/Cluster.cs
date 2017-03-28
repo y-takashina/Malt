@@ -11,7 +11,7 @@ namespace Malt.Clustering
 
         public void Print(string indent = "")
         {
-            // ポリモーフィズムで書くとコードの凝集性が下がって読みづらくなる。
+            // ポリモーフィズムで書くと散らばって読みづらい。
             if (this is Single<T>) Console.WriteLine(indent + this);
             else
             {
