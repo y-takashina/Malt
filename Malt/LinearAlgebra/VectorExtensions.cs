@@ -95,13 +95,13 @@ namespace Malt.LinearAlgebra
             return variables.Zip(weights, (v, w) => v.Mul(w)).Aggregate(Zeros(n), (v1, v2) => v1.Add(v2));
         }
 
-        public static T[,] Reshape<T>(this IEnumerable<T> stream, (int, int) ints)
+        public static T[,] Reshape<T>(this IEnumerable<T> stream, (int, int) shape)
         {
             var array = stream as T[] ?? stream.ToArray();
-            var results = new T[ints.Item1, ints.Item2];
-            for (var i = 0; i < ints.Item1; i++)
+            var results = new T[shape.Item1, shape.Item2];
+            for (var i = 0; i < shape.Item1; i++)
             {
-                for (var j = 0; j < ints.Item2; j++)
+                for (var j = 0; j < shape.Item2; j++)
                 {
                     results[i, j] = array[i + j];
                 }
@@ -109,15 +109,15 @@ namespace Malt.LinearAlgebra
             return results;
         }
 
-        public static T[,,] Reshape<T>(this IEnumerable<T> stream, (int, int, int) ints)
+        public static T[,,] Reshape<T>(this IEnumerable<T> stream, (int, int, int) shape)
         {
             var array = stream as T[] ?? stream.ToArray();
-            var results = new T[ints.Item1, ints.Item2, ints.Item3];
-            for (var i = 0; i < ints.Item1; i++)
+            var results = new T[shape.Item1, shape.Item2, shape.Item3];
+            for (var i = 0; i < shape.Item1; i++)
             {
-                for (var j = 0; j < ints.Item2; j++)
+                for (var j = 0; j < shape.Item2; j++)
                 {
-                    for (var k = 0; k < ints.Item2; k++)
+                    for (var k = 0; k < shape.Item2; k++)
                     {
                         results[i, j, k] = array[i + j + k];
                     }
@@ -126,17 +126,17 @@ namespace Malt.LinearAlgebra
             return results;
         }
 
-        public static T[,,,] Reshape<T>(this IEnumerable<T> stream, (int, int, int, int) ints)
+        public static T[,,,] Reshape<T>(this IEnumerable<T> stream, (int, int, int, int) shape)
         {
             var array = stream as T[] ?? stream.ToArray();
-            var results = new T[ints.Item1, ints.Item2, ints.Item3, ints.Item4];
-            for (var i = 0; i < ints.Item1; i++)
+            var results = new T[shape.Item1, shape.Item2, shape.Item3, shape.Item4];
+            for (var i = 0; i < shape.Item1; i++)
             {
-                for (var j = 0; j < ints.Item2; j++)
+                for (var j = 0; j < shape.Item2; j++)
                 {
-                    for (var k = 0; k < ints.Item3; k++)
+                    for (var k = 0; k < shape.Item3; k++)
                     {
-                        for (var l = 0; l < ints.Item4; l++)
+                        for (var l = 0; l < shape.Item4; l++)
                         {
                             results[i, j, k, l] = array[i + j + k + l];
                         }
