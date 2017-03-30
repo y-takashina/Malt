@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Malt.LinearAlgebra
 {
@@ -15,17 +16,17 @@ namespace Malt.LinearAlgebra
 
         public static double[] Zeros(int n) => new double[n];
 
-        public static double[] Random(int n, double mean = 0, double amplitude = 1)
+        public static double[] Random(int n, double mean, double amplitude)
         {
             var rand = new Random();
             var vector = new double[n];
-            for (var i = 0; i < n; i++) vector[i] = amplitude * (rand.NextDouble() - 0.5) * 2 + mean;
+            for (var i = 0; i < n; i++) vector[i] = mean - amplitude / 2 + amplitude * rand.NextDouble();
             return vector;
         }
 
-        public static double[] Gauss(int n, double mean = 0, double deviation = 1)
+        public static double[] Gauss(int n, double mean, double deviation)
         {
-            throw new NotImplementedException();
+            return Random(n, 0.5, 1).Select(v => Statistics.Statistics.Gauss(v, mean, deviation)).ToArray();
         }
 
         public static int[] OneHot(int n, int k)
