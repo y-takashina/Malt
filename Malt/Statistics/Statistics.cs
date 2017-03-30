@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Malt
+namespace Malt.Statistics
 {
-    public static class ProbabilityExtensions
+    public static class Statistics
     {
         public static double Mean(this IEnumerable<double> enumerable) => enumerable.Average();
 
@@ -88,6 +88,11 @@ namespace Malt
             if (x < mean) x = 2 * mean - x;
             var z = (x - mean) / standardDeviation;
             return Erfc(z / Math.Sqrt(2)) / 2;
+        }
+
+        public static double Gauss(double x, double mean, double deviation)
+        {
+            return 1 / Math.Sqrt(2 * Math.PI * deviation) * Math.Exp(-Math.Pow(x - mean, 2) / 2 / deviation);
         }
     }
 }
