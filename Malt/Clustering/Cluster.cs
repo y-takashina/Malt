@@ -38,15 +38,15 @@ namespace Malt.Clustering
             return clusters.ToArray();
         }
 
-        public List<T> SelectMany(List<T> acc = null)
+        public List<TResult> SelectMany<TResult>(Func<T, TResult> selector, List<TResult> acc = null)
         {
-            acc = acc ?? new List<T>();
-            if (this is Single<T> single) acc.Add(single.Value);
+            acc = acc ?? new List<TResult>();
+            if (this is Single<T> single) acc.Add(selector(single.Value));
             else
             {
                 var couple = (Couple<T>) this;
-                acc.AddRange(couple.Left.SelectMany());
-                acc.AddRange(couple.Right.SelectMany());
+                acc.AddRange(couple.Left.SelectMany(selector));
+                acc.AddRange(couple.Right.SelectMany(selector));
             }
             return acc.ToList();
         }
