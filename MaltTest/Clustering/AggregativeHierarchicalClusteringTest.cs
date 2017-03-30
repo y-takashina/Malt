@@ -23,15 +23,14 @@ namespace MaltTest.Clustering
                 Cluster(Cluster(69), Cluster(33))), Cluster(Cluster(95), Cluster(22)))), Cluster(Cluster(Cluster(8), Cluster(38)), Cluster(72))));
         }
 
-
         [Fact]
         public void ExtractTest()
         {
             var clusters = _cluster.Extract(2);
-            var c1 = Cluster(Cluster(60), Cluster(Cluster(68), Cluster(31)));
-            var c2 = Cluster(Cluster(99), Cluster(19));
-            Assert.Equal(clusters[0].ToString(), c1.ToString());
-            Assert.Equal(clusters[1].ToString(), c2.ToString());
+            var left = Cluster(Cluster(60), Cluster(Cluster(68), Cluster(31)));
+            var right = Cluster(Cluster(99), Cluster(19));
+            Assert.Equal(clusters[0], left);
+            Assert.Equal(clusters[1], right);
         }
 
         [Fact]
