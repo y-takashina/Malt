@@ -65,6 +65,11 @@ namespace Malt.LinearAlgebra
             return results;
         }
 
+        public static IEnumerable<double> ElementwiseProduct(this IEnumerable<double> stream1, IEnumerable<double> stream2)
+        {
+            return stream1.Zip(stream2, (v, w) => v * w);
+        }
+
         public static double Norm(this IEnumerable<double> stream, double order = 2.0)
         {
             return Math.Pow(stream.Sum(v => Math.Pow(v, order)), 1 / order);
