@@ -8,18 +8,18 @@ namespace Malt
     {
         public static double Mean(this IEnumerable<double> enumerable) => enumerable.Average();
 
-        public static double Deviation(this IEnumerable<double> enumerable)
+        public static double Deviation(this IEnumerable<double> stream)
         {
-            var array = enumerable as double[] ?? enumerable.ToArray();
+            var array = stream as double[] ?? stream.ToArray();
             if (!array.Any()) return 0;
             var avg = array.Average();
             var sum = array.Sum(x => Math.Pow(x - avg, 2));
             return sum / array.Length;
         }
 
-        public static double StandardDeviation(this IEnumerable<double> enumerable)
+        public static double StandardDeviation(this IEnumerable<double> stream)
         {
-            return Math.Sqrt(enumerable.Deviation());
+            return Math.Sqrt(stream.Deviation());
         }
 
         public static double Entropy(this IEnumerable<double> probabilities)
@@ -27,27 +27,27 @@ namespace Malt
             return probabilities.Where(p => Math.Abs(p) > 1e-300).Sum(p => -p * Math.Log(p, 2));
         }
 
-        public static double Entropy<T>(this IEnumerable<T> series)
+        public static double Entropy<T>(this IEnumerable<T> stream)
         {
-            var array = series.ToArray();
+            var array = stream.ToArray();
             var points = array.Distinct().ToArray();
             var probabilities = points.Select(v1 => (double) array.Count(v2 => Equals(v1, v2)) / array.Length);
             return probabilities.Entropy();
         }
 
-        public static double JointEntropy(IEnumerable<int> series1, IEnumerable<int> series2)
+        public static double JointEntropy(IEnumerable<int> stream1, IEnumerable<int> stream2)
         {
-            return series1.Zip(series2, Tuple.Create).Entropy();
+            return stream1.Zip(stream2, Tuple.Create).Entropy();
         }
 
-        public static double MutualInformation(IEnumerable<int> series1, IEnumerable<int> series2)
+        public static double MutualInformation(IEnumerable<int> stream1, IEnumerable<int> stream2)
         {
-            return series1.Entropy() + series2.Entropy() - JointEntropy(series1, series2);
+            return stream1.Entropy() + stream2.Entropy() - JointEntropy(stream1, stream2);
         }
 
-        public static double[,] MutualInformationMatrix(IEnumerable<IEnumerable<int>> series)
+        public static double[,] MutualInformation(IEnumerable<IEnumerable<int>> streams)
         {
-            var array = series as IEnumerable<int>[] ?? series.ToArray();
+            var array = streams as IEnumerable<int>[] ?? streams.ToArray();
             var n = array.Length;
             var matrix = new double[n, n];
             for (var j = 0; j < n; j++)
