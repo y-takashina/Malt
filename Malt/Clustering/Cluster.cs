@@ -58,7 +58,7 @@ namespace Malt.Clustering
             return acc;
         }
 
-        public abstract double DistanceTo(Cluster<T> to, Func<T, T, double> calcPointwiseDistance, Func<(double, int), (double, int), double> calcClusterwiseDistance);
+        public abstract double DistanceTo(Cluster<T> to, Func<T, T, double> pointwiseDistance, Func<(double, int), (double, int), double> clusterwiseDistance);
     }
 
     public class Single<T> : Cluster<T>
@@ -91,14 +91,14 @@ namespace Malt.Clustering
             return "Single(" + Value + ")";
         }
 
-        public override double DistanceTo(Cluster<T> to, Func<T, T, double> calcPointwiseDistance, Func<(double, int), (double, int), double> calcClusterwiseDistance)
+        public override double DistanceTo(Cluster<T> to, Func<T, T, double> pointwiseDistance, Func<(double, int), (double, int), double> clusterwiseDistance)
         {
-            if (to is Single<T> single) return calcPointwiseDistance(Value, single.Value);
+            if (to is Single<T> single) return pointwiseDistance(Value, single.Value);
             var couple = to as Couple<T>;
             if (couple == null) throw new InvalidCastException("`to` must be Single<T> or Couple<T>.");
-            var left = DistanceTo(couple.Left, calcPointwiseDistance, calcClusterwiseDistance);
-            var right = DistanceTo(couple.Right, calcPointwiseDistance, calcClusterwiseDistance);
-            return calcClusterwiseDistance((left, couple.Left.Count), (right, couple.Right.Count));
+            var left = DistanceTo(couple.Left, pointwiseDistance, clusterwiseDistance);
+            var right = DistanceTo(couple.Right, pointwiseDistance, clusterwiseDistance);
+            return clusterwiseDistance((left, couple.Left.Count), (right, couple.Right.Count));
         }
     }
 
@@ -138,11 +138,11 @@ namespace Malt.Clustering
             return "Couple(" + Left + ", " + Right + ")";
         }
 
-        public override double DistanceTo(Cluster<T> to, Func<T, T, double> calcPointwiseDistance, Func<(double, int), (double, int), double> calcClusterwiseDistance)
+        public override double DistanceTo(Cluster<T> to, Func<T, T, double> pointwiseDistance, Func<(double, int), (double, int), double> clusterwiseDistance)
         {
-            var left = Left.DistanceTo(to, calcPointwiseDistance, calcClusterwiseDistance);
-            var right = Right.DistanceTo(to, calcPointwiseDistance, calcClusterwiseDistance);
-            return calcClusterwiseDistance((left, Left.Count), (right, Right.Count));
+            var left = Left.DistanceTo(to, pointwiseDistance, clusterwiseDistance);
+            var right = Right.DistanceTo(to, pointwiseDistance, clusterwiseDistance);
+            return clusterwiseDistance((left, Left.Count), (right, Right.Count));
         }
     }
 
