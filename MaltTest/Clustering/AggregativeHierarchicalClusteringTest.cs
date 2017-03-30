@@ -29,15 +29,16 @@ namespace MaltTest.Clustering
             var clusters = _cluster.Extract(2);
             var left = Cluster(Cluster(60), Cluster(Cluster(68), Cluster(31)));
             var right = Cluster(Cluster(99), Cluster(19));
-            Assert.Equal(clusters[0], left);
-            Assert.Equal(clusters[1], right);
+            Assert.Equal(clusters.First(), left);
+            Assert.Equal(clusters.Last(), right);
         }
 
         [Fact]
         public void SelectManyTest()
         {
-            // must confirmed manually
-            _cluster.SelectMany(v => v).ForEach(Console.WriteLine);
+            var elements = _cluster.SelectMany(v => v);
+            Assert.Empty(elements.Except(new[] {60, 68, 31, 99, 19}));
+            Assert.Equal(19, elements.Except(new[] {60, 68, 31, 99}).First());
         }
 
         [Fact]

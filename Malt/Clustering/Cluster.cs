@@ -38,7 +38,7 @@ namespace Malt.Clustering
             return clusters.ToArray();
         }
 
-        public List<TResult> SelectMany<TResult>(Func<T, TResult> selector, List<TResult> acc = null)
+        public IEnumerable<TResult> SelectMany<TResult>(Func<T, TResult> selector, List<TResult> acc = null)
         {
             acc = acc ?? new List<TResult>();
             if (this is Single<T> single) acc.Add(selector(single.Value));
@@ -48,7 +48,7 @@ namespace Malt.Clustering
                 acc.AddRange(couple.Left.SelectMany(selector));
                 acc.AddRange(couple.Right.SelectMany(selector));
             }
-            return acc.ToList();
+            return acc;
         }
 
         public abstract double DistanceTo(Cluster<T> to, Func<T, T, double> calcPointwiseDistance, Func<(double, int), (double, int), double> calcClusterwiseDistance);
