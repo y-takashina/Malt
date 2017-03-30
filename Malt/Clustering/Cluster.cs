@@ -107,6 +107,25 @@ namespace Malt.Clustering
             Count = left.Count + right.Count;
         }
 
+        public override bool Equals(object obj)
+        {
+            return obj is Couple<T> couple && Equals(couple);
+        }
+
+        protected bool Equals(Couple<T> other)
+        {
+            return Left.Equals(other.Left) && Right.Equals(other.Right) ||
+                   Left.Equals(other.Right) && Right.Equals(other.Left);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return ((Left?.GetHashCode() ?? 0) * 397) ^ (Right?.GetHashCode() ?? 0);
+            }
+        }
+
         public override string ToString()
         {
             return "Couple(" + Left + ", " + Right + ")";
