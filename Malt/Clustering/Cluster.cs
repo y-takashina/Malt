@@ -29,7 +29,14 @@ namespace Malt.Clustering
             {
                 var curr = clusters.First();
                 var max = double.MinValue;
-                foreach (var c in clusters) if (c.Count > max) curr = c;
+                foreach (var c in clusters)
+                {
+                    if (c.Count > max)
+                    {
+                        curr = c;
+                        max = c.Count;
+                    }
+                }
                 var couple = (Couple<T>) curr;
                 clusters.Add(couple.Left);
                 clusters.Add(couple.Right);
