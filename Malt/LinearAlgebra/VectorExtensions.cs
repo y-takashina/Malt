@@ -7,9 +7,9 @@ namespace Malt.LinearAlgebra
 {
     public static partial class Vector
     {
-        public static void Print<T>(this IEnumerable<T> enumerable)
+        public static void Print<T>(this IEnumerable<T> stream)
         {
-            var array = enumerable as T[] ?? enumerable.ToArray();
+            var array = stream as T[] ?? stream.ToArray();
             Console.Write("[");
             for (var i = 0; i < array.Length; i++)
             {
@@ -19,41 +19,41 @@ namespace Malt.LinearAlgebra
             Console.Write("]");
         }
 
-        public static void PrintLine<T>(this IEnumerable<T> enumerable)
+        public static void PrintLine<T>(this IEnumerable<T> stream)
         {
-            enumerable.Print();
+            stream.Print();
             Console.WriteLine();
         }
 
-        public static double[] Add(this IEnumerable<double> vector1, IEnumerable<double> vector2)
+        public static double[] Add(this IEnumerable<double> stream1, IEnumerable<double> stream2)
         {
-            return vector1.Zip(vector2, (v1, v2) => v1 + v2).ToArray();
+            return stream1.Zip(stream2, (v1, v2) => v1 + v2).ToArray();
         }
 
-        public static double[] Sub(this IEnumerable<double> vector1, IEnumerable<double> vector2)
+        public static double[] Sub(this IEnumerable<double> stream1, IEnumerable<double> stream2)
         {
-            return vector1.Zip(vector2, (v1, v2) => v1 - v2).ToArray();
+            return stream1.Zip(stream2, (v1, v2) => v1 - v2).ToArray();
         }
 
-        public static double[] Mul(this IEnumerable<double> vector, double scalar)
+        public static double[] Mul(this IEnumerable<double> stream, double scalar)
         {
-            return vector.Select(v => v * scalar).ToArray();
+            return stream.Select(v => v * scalar).ToArray();
         }
 
-        public static double[] Div(this IEnumerable<double> vector, double scalar)
+        public static double[] Div(this IEnumerable<double> stream, double scalar)
         {
-            return vector.Select(v => v / scalar).ToArray();
+            return stream.Select(v => v / scalar).ToArray();
         }
 
-        public static double InnerProduct(this IEnumerable<double> vector1, IEnumerable<double> vector2)
+        public static double InnerProduct(this IEnumerable<double> stream1, IEnumerable<double> stream2)
         {
-            return vector1.Zip(vector2, (v, w) => v * w).Sum();
+            return stream1.Zip(stream2, (v, w) => v * w).Sum();
         }
 
-        public static double[,] OuterProduct(this IEnumerable<double> vector1, IEnumerable<double> vector2)
+        public static double[,] OuterProduct(this IEnumerable<double> stream1, IEnumerable<double> stream2)
         {
-            var array1 = vector1 as double[] ?? vector1.ToArray();
-            var array2 = vector2 as double[] ?? vector2.ToArray();
+            var array1 = stream1 as double[] ?? stream1.ToArray();
+            var array2 = stream2 as double[] ?? stream2.ToArray();
             var results = new double[array1.Length, array2.Length];
             for (var i = 0; i < array1.Length; i++)
             {
@@ -65,21 +65,21 @@ namespace Malt.LinearAlgebra
             return results;
         }
 
-        public static double Norm(this IEnumerable<double> vector, double order = 2.0)
+        public static double Norm(this IEnumerable<double> stream, double order = 2.0)
         {
-            return Math.Pow(vector.Sum(v => Math.Pow(v, order)), 1 / order);
+            return Math.Pow(stream.Sum(v => Math.Pow(v, order)), 1 / order);
         }
 
-        public static double[] Normalize(this IEnumerable<int> enumerable)
+        public static double[] Normalize(this IEnumerable<int> stream)
         {
-            var array = enumerable as int[] ?? enumerable.ToArray();
+            var array = stream as int[] ?? stream.ToArray();
             var sum = array.Sum();
             return array.Select(v => (double) v / sum).ToArray();
         }
 
-        public static double[] Normalize(this IEnumerable<double> enumerable)
+        public static double[] Normalize(this IEnumerable<double> stream)
         {
-            var array = enumerable as double[] ?? enumerable.ToArray();
+            var array = stream as double[] ?? stream.ToArray();
             var sum = array.Sum();
             return array.Select(v => v / sum).ToArray();
         }
@@ -95,9 +95,9 @@ namespace Malt.LinearAlgebra
             return variables.Zip(weights, (v, w) => v.Mul(w)).Aggregate(Zeros(n), (v1, v2) => v1.Add(v2));
         }
 
-        public static T[,] Reshape<T>(this IEnumerable<T> enumerable, (int, int) ints)
+        public static T[,] Reshape<T>(this IEnumerable<T> stream, (int, int) ints)
         {
-            var array = enumerable as T[] ?? enumerable.ToArray();
+            var array = stream as T[] ?? stream.ToArray();
             var results = new T[ints.Item1, ints.Item2];
             for (var i = 0; i < ints.Item1; i++)
             {
@@ -109,9 +109,9 @@ namespace Malt.LinearAlgebra
             return results;
         }
 
-        public static T[,,] Reshape<T>(this IEnumerable<T> enumerable, (int, int, int) ints)
+        public static T[,,] Reshape<T>(this IEnumerable<T> stream, (int, int, int) ints)
         {
-            var array = enumerable as T[] ?? enumerable.ToArray();
+            var array = stream as T[] ?? stream.ToArray();
             var results = new T[ints.Item1, ints.Item2, ints.Item3];
             for (var i = 0; i < ints.Item1; i++)
             {
@@ -126,9 +126,9 @@ namespace Malt.LinearAlgebra
             return results;
         }
 
-        public static T[,,,] Reshape<T>(this IEnumerable<T> enumerable, (int, int, int, int) ints)
+        public static T[,,,] Reshape<T>(this IEnumerable<T> stream, (int, int, int, int) ints)
         {
-            var array = enumerable as T[] ?? enumerable.ToArray();
+            var array = stream as T[] ?? stream.ToArray();
             var results = new T[ints.Item1, ints.Item2, ints.Item3, ints.Item4];
             for (var i = 0; i < ints.Item1; i++)
             {
