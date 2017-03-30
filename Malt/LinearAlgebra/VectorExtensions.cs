@@ -75,13 +75,6 @@ namespace Malt.LinearAlgebra
             return Math.Pow(stream.Sum(v => Math.Pow(v, order)), 1 / order);
         }
 
-        public static double[] Normalize(this IEnumerable<int> stream)
-        {
-            var array = stream as int[] ?? stream.ToArray();
-            var sum = array.Sum();
-            return array.Select(v => (double) v / sum).ToArray();
-        }
-
         public static double[] Normalize(this IEnumerable<double> stream)
         {
             var array = stream as double[] ?? stream.ToArray();
