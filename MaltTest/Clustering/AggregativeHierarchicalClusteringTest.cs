@@ -35,11 +35,10 @@ namespace MaltTest.Clustering
         }
 
         [Fact]
-        public void GetMembersTest()
+        public void SelectManyTest()
         {
-            // 目視する必要がある。
-            var members = _cluster.SelectMany();
-            members.ForEach(Console.WriteLine);
+            // must confirmed manually
+            _cluster.SelectMany(v => v).ForEach(Console.WriteLine);
         }
 
         [Fact]
