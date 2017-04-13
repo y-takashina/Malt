@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Malt.General;
 
 namespace Malt.LinearAlgebra
 {
@@ -16,6 +17,13 @@ namespace Malt.LinearAlgebra
 
         public static double[] Zeros(int n) => new double[n];
 
+        /// <summary>
+        /// Returns an array whose values are randomly initialized with a uniform distribution.
+        /// </summary>
+        /// <param name="n">The dimension of the array.</param>
+        /// <param name="mean"></param>
+        /// <param name="amplitude"></param>
+        /// <returns></returns>
         public static double[] Random(int n, double mean, double amplitude)
         {
             var rand = new Random();
@@ -24,9 +32,16 @@ namespace Malt.LinearAlgebra
             return vector;
         }
 
+        /// <summary>
+        /// Returns an array whose values are randomly initialized with a Gaussian distribution.
+        /// </summary>
+        /// <param name="n">The dimension of the array.</param>
+        /// <param name="mean"></param>
+        /// <param name="deviation"></param>
+        /// <returns></returns>
         public static double[] Gauss(int n, double mean, double deviation)
         {
-            return Random(n, 0.5, 1).Select(v => Statistics.Statistics.Gauss(v, mean, deviation)).ToArray();
+            return Random(n, 0.5, 1).Select(v => Statistics.Gauss(v, mean, deviation)).ToArray();
         }
 
         public static int[] OneHot(int n, int k)

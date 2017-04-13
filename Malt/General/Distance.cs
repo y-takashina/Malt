@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Malt.Metrics
+namespace Malt.General
 {
     public static class Distance
     {
