@@ -15,5 +15,14 @@ namespace MaltTest.Clustering
                 Cluster(Cluster(69), Cluster(33))), Cluster(Cluster(95), Cluster(22)))), Cluster(Cluster(Cluster(8), Cluster(38)), Cluster(72))));
             cluster.Print();
         }
+
+        [Fact]
+        public void FactoryTest()
+        {
+            var single = Cluster(1);
+            Assert.IsType<Single<int>>(single);
+            var couple = Cluster(Cluster(1), Cluster(2));
+            Assert.IsType<Couple<int>>(couple);
+        }
     }
 }
