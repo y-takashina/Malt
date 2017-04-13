@@ -12,18 +12,18 @@ namespace Malt.Clustering
         public void Print(string indent = "")
         {
             // ポリモーフィズムで書くと散らばって読みづらい。
-            if (this is Single<T>) Console.WriteLine(indent + this);
+            if (this is Single<T> single) Console.WriteLine(indent + single);
             else
             {
-                var c = (Couple<T>) this;
-                c.Left.Print(indent + "|-");
-                c.Right.Print(Regex.Replace(indent, @"\-|\+", " ") + "+-");
+                var couple = (Couple<T>) this;
+                couple.Left.Print(indent + "|-");
+                couple.Right.Print(Regex.Replace(indent, @"\-|\+", " ") + "+-");
             }
         }
 
         public Cluster<T>[] Extract(int n)
         {
-            if (Count < n) throw new Exception("Count of cluster must be greater than n.");
+            if (Count < n) throw new Exception("Count of the cluster must be greater than n.");
             var clusters = new List<Cluster<T>> {this};
             for (var i = 1; i < n; i++)
             {
