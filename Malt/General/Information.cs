@@ -8,7 +8,8 @@ namespace Malt.General
     {
         public static double Entropy(this IEnumerable<double> probabilities)
         {
-            return probabilities.Where(p => Math.Abs(p) > 1e-300).Sum(p => -p * Math.Log(p, 2));
+            if (probabilities.Any(v => v < 0)) throw new ArgumentException("Probability connot be negative.");
+            return probabilities.Where(p => p > double.Epsilon).Sum(p => -p * Math.Log(p, 2));
         }
 
         public static double Entropy<T>(this IEnumerable<T> stream)
